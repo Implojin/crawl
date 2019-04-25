@@ -226,6 +226,16 @@ moss2
 moss3
 
 %weight 10
+limestone0 FLOOR_SOLARIUM
+limestone1
+limestone2
+limestone3
+white_marble0
+white_marble1
+white_marble2
+white_marble3
+
+%weight 10
 bog_green0 FLOOR_SLIME
 %weight 1
 bog_green1

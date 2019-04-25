@@ -144,6 +144,7 @@ enum dungeon_feature_type
     DNGN_ENTER_FOREST,
 #endif
     DNGN_ENTER_DEPTHS,
+    DNGN_ENTER_SOLARIUM,
 
     // Exits from various branches
     // Order must be the same as above
@@ -170,6 +171,7 @@ enum dungeon_feature_type
     DNGN_EXIT_FOREST,
 #endif
     DNGN_EXIT_DEPTHS,
+    DNGN_EXIT_SOLARIUM,
 
     DNGN_ALTAR_ZIN,
     DNGN_ALTAR_SHINING_ONE,

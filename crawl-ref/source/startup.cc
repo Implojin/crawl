@@ -266,6 +266,7 @@ static void _pregen_dungeon()
         BRANCH_DUNGEON,
         BRANCH_TEMPLE,
         BRANCH_LAIR,
+        BRANCH_SOLARIUM,
         BRANCH_ORC,
         BRANCH_SPIDER,
         BRANCH_SNAKE,

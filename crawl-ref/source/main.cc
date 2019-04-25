@@ -1274,6 +1274,25 @@ static bool _can_take_stairs(dungeon_feature_type ftype, bool down,
             return false;
         }
     }
+    
+    // Mutual branch exclusions
+    for (branch_iterator it; it; ++it)
+    {
+        if (ftype != it->entry_stairs)
+            continue;
+        
+        if (!you.level_visited(level_id(it->id, 1)))
+        {
+            if ((it->id == BRANCH_SOLARIUM && you.level_visited(level_id(BRANCH_LAIR, 1)))
+                || (it->id == BRANCH_LAIR && you.level_visited(level_id(BRANCH_SOLARIUM, 1))))
+                {
+                    mpr("This branch entrance has collapsed.");
+                    return false;
+                }
+        }
+        
+        break;
+    }
 
     // Rune locks
     int min_runes = 0;

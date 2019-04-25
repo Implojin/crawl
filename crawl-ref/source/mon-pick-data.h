@@ -1061,6 +1061,49 @@ static const pop_entry pop_depths[] =
   { 0,0,0,FLAT,MONS_0 }
 };
 
+static const pop_entry pop_solarium[] =
+{ // Solarium (OOD cap: 12)
+  {  1,  5, 5500, FLAT, MONS_NO_MONSTER }, // Roughly old D:1-4 chaff weight
+  { -1,  5,   52, SEMI, MONS_BLACK_BEAR },
+  { -1,  7,  260, SEMI, MONS_BASILISK },
+  { -1, 11,  440, SEMI, MONS_HYDRA },
+  {  0,  4,   24, PEAK, MONS_SCORPION },
+  {  0,  6,  260, SEMI, MONS_WOLF },
+  {  0,  9,  240, PEAK, MONS_RIME_DRAKE },
+  {  0, 11,  380, SEMI, MONS_BLACK_MAMBA },
+  {  1,  5, 1000, FLAT, MONS_PORCUPINE },
+  {  1,  5, 1000, FLAT, MONS_BULLFROG },
+  {  1,  6,  990, FLAT, MONS_CROCODILE },
+  {  1,  6,  990, FLAT, MONS_WATER_MOCCASIN },
+  {  1,  6,  515, FLAT, MONS_HIPPOGRIFF },
+  {  1,  6,  515, FLAT, MONS_YAK },
+  {  1,  7,  188, PEAK, MONS_WYVERN },
+  {  1,  8,  380, SEMI, MONS_BLINK_FROG },
+  {  1,  6,  900, FLAT, MONS_SPINY_FROG },
+  {  7, 10,  160, FLAT, MONS_SPINY_FROG },
+  {  1,  6,  515, FLAT, MONS_KOMODO_DRAGON },
+  {  7, 10,  160, FLAT, MONS_KOMODO_DRAGON },
+  {  2,  5,    8, PEAK, MONS_HORNET },
+  {  2,  5,   25, PEAK, MONS_STEAM_DRAGON },
+  {  2,  7,   25, PEAK, MONS_OKLOB_PLANT },
+  {  2,  8,   25, PEAK, MONS_HELL_RAT },
+  {  2,  8,  100, SEMI, MONS_POLAR_BEAR },
+  {  2,  9,  240, PEAK, MONS_ELEPHANT },
+  {  2, 10,  160, RISE, MONS_DEATH_YAK },
+  {  2, 11,   44, SEMI, MONS_CATOBLEPAS },
+  {  2, 16,   60, SEMI, MONS_TORPOR_SNAIL },
+  {  3,  8,   52, SEMI, MONS_POLAR_BEAR },
+  {  3, 10,   25, PEAK, MONS_LINDWURM },
+  {  4, 12,  140, SEMI, MONS_DREAM_SHEEP },
+  {  4, 16,   36, RISE, MONS_FIRE_CRAB },
+  { 11, 12,   32, FLAT, MONS_DIRE_ELEPHANT },
+  { 11, 12,   32, FLAT, MONS_ALLIGATOR },
+  { 11, 12,   32, FLAT, MONS_MANTICORE },
+  { 11, 12,   32, FLAT, MONS_ANACONDA },
+  { 11, 12,   32, FLAT, MONS_WOLF_SPIDER },
+  { 0,0,0,FLAT,MONS_0 }
+};
+
 struct population_list
 {
     const pop_entry *pop;
@@ -1132,6 +1175,7 @@ static const population_list population[] =
 #if TAG_MAJOR_VERSION == 34
     POP(gauntlet),
 #endif
+    POP(solarium),
 };
 COMPILE_CHECK(ARRAYSZ(population) == NUM_BRANCHES);
 
@@ -1249,6 +1293,7 @@ static const population_list population_zombie[] =
 #if TAG_MAJOR_VERSION == 34
     POP(gauntlet),
 #endif
+    POP(solarium),
 };
 COMPILE_CHECK(ARRAYSZ(population_zombie) == NUM_BRANCHES);
 
@@ -1365,6 +1410,7 @@ static const population_list population_water[] =
 #if TAG_MAJOR_VERSION == 34
     POP(water_generic), // Gauntlet
 #endif
+    POP(water_generic), // Solarium
 };
 COMPILE_CHECK(ARRAYSZ(population_water) == NUM_BRANCHES);
 
@@ -1477,5 +1523,6 @@ static const population_list population_lava[] =
 #if TAG_MAJOR_VERSION == 34
     POP(lava_generic), // Gauntlet
 #endif
+    POP(lava_generic), // Solarium
 };
 COMPILE_CHECK(ARRAYSZ(population_lava) == NUM_BRANCHES);

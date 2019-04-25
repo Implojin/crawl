@@ -362,4 +362,12 @@ const Branch branches[NUM_BRANCHES] =
       BLACK, BLACK,
       '!', {}, branch_noise::normal },
 #endif
+    { BRANCH_SOLARIUM, BRANCH_DUNGEON, 8, 8, 6, 10,
+      brflag::none,
+      DNGN_ENTER_SOLARIUM, DNGN_EXIT_SOLARIUM, NUM_FEATURES,
+      "Solarium", "the Solarium", "Solar",
+      "The gate collapses as you enter the Solarium.\n"
+      "The only way out is forward!",
+      ETC_DECAY, ETC_HOLY,
+      '@', {}, branch_noise::normal },
 };

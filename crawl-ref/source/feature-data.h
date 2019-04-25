@@ -393,6 +393,9 @@ PORTAL_EXIT(DNGN_EXIT_PANDEMONIUM, "gate leading out of Pandemonium", "exit_pand
 PORTAL_ENTRANCE(DNGN_ENTER_VAULTS, "gate to the Vaults", "enter_vaults", LIGHTGREEN),
 PORTAL_EXIT(DNGN_EXIT_VAULTS, "gate leading back out of this place", "exit_vaults", LIGHTGREEN),
 
+PORTAL_ENTRANCE(DNGN_ENTER_SOLARIUM, "gate to the Solarium", "enter_solarium", ETC_ELVEN_BRICK),
+PORTAL_EXIT(DNGN_EXIT_SOLARIUM, "gate leading back out of this place", "exit_solarium", ETC_ELVEN_BRICK),
+
 PORTAL_ENTRANCE(DNGN_ENTER_ZOT, "gate to the Realm of Zot", "enter_zot", MAGENTA),
 PORTAL_EXIT(DNGN_EXIT_ZOT, "gate leading back out of this place", "exit_zot", MAGENTA),
 

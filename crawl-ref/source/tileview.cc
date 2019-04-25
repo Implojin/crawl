@@ -194,6 +194,11 @@ void tile_default_flv(branch_type br, int depth, tile_flavour &flv)
         flv.floor = TILE_FLOOR_SPIDER;
         return;
 
+    case BRANCH_SOLARIUM:
+        flv.wall  = TILE_WALL_SOLARIUM;
+        flv.floor = TILE_FLOOR_SOLARIUM;
+        return;
+
     case BRANCH_ZOT:
         flv.wall  = TILE_WALL_ZOT_YELLOW;
         flv.floor = TILE_FLOOR_TOMB;

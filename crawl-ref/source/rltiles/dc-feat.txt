@@ -356,6 +356,9 @@ enter_shoals DNGN_ENTER_SHOALS
 exit_shoals DNGN_EXIT_SHOALS
 enter_slime DNGN_ENTER_SLIME
 exit_slime DNGN_EXIT_SLIME
+enter_solarium_closed DNGN_ENTER_SOLARIUM_CLOSED
+enter_solarium_open DNGN_ENTER_SOLARIUM_OPEN
+exit_solarium DNGN_EXIT_SOLARIUM
 enter_vaults_closed DNGN_ENTER_VAULTS_CLOSED
 enter_vaults_open DNGN_ENTER_VAULTS_OPEN
 exit_vaults DNGN_EXIT_VAULTS

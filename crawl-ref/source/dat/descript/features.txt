@@ -509,6 +509,12 @@ A gate to the Vaults
 
 A gateway leading to the Vaults.
 %%%%
+A gate to the Solarium
+
+A one-way gateway leading to the upper Solarium, at the edge of the Eternal
+Kingdom. Beware! This accursed plane was sealed long ago. Once upon the Eternal
+path, there is no escape.
+%%%%
 A transporter
 
 A one-way portal to another place on this level. When using a transporter,

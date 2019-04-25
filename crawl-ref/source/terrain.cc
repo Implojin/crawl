@@ -112,7 +112,9 @@ bool feat_is_staircase(dungeon_feature_type feat)
     if (feat == DNGN_ENTER_VAULTS
         || feat == DNGN_EXIT_VAULTS
         || feat == DNGN_ENTER_ZOT
-        || feat == DNGN_EXIT_ZOT)
+        || feat == DNGN_EXIT_ZOT
+        || feat == DNGN_ENTER_SOLARIUM
+        || feat == DNGN_EXIT_SOLARIUM)
     {
         return false;
     }
@@ -286,6 +288,8 @@ bool feat_is_gate(dungeon_feature_type feat)
     case DNGN_TRANSIT_PANDEMONIUM:
     case DNGN_ENTER_VAULTS:
     case DNGN_EXIT_VAULTS:
+    case DNGN_ENTER_SOLARIUM:
+    case DNGN_EXIT_SOLARIUM:
     case DNGN_ENTER_ZOT:
     case DNGN_EXIT_ZOT:
     case DNGN_ENTER_HELL:
@@ -621,6 +625,8 @@ bool feat_is_bidirectional_portal(dungeon_feature_type feat)
            && feat != DNGN_EXIT_ZOT
            && feat != DNGN_ENTER_VAULTS
            && feat != DNGN_EXIT_VAULTS
+           && feat != DNGN_ENTER_SOLARIUM
+           && feat != DNGN_EXIT_SOLARIUM
            && feat != DNGN_EXIT_HELL
            && feat != DNGN_ENTER_HELL;
 }

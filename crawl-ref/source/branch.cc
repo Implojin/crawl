@@ -58,6 +58,7 @@ static const branch_type logical_branch_order[] = {
     BRANCH_WIZLAB,
     BRANCH_DESOLATION,
     BRANCH_GAUNTLET,
+    BRANCH_SOLARIUM,
 };
 COMPILE_CHECK(ARRAYSZ(logical_branch_order) == NUM_BRANCHES);
 
@@ -71,6 +72,7 @@ static const branch_type danger_branch_order[] = {
     BRANCH_OSSUARY,
     BRANCH_BAILEY,
     BRANCH_LAIR,
+    BRANCH_SOLARIUM,
     BRANCH_GAUNTLET,
     BRANCH_ICE_CAVE,
     BRANCH_VOLCANO,
@@ -182,8 +184,9 @@ bool is_hell_branch(branch_type branch)
 
 bool is_random_subbranch(branch_type branch)
 {
-    return parent_branch(branch) == BRANCH_LAIR
-           && branch != BRANCH_SLIME;
+    return (parent_branch(branch) == BRANCH_LAIR
+           && branch != BRANCH_SLIME)
+           || parent_branch(branch) == BRANCH_SOLARIUM;
 }
 
 bool is_connected_branch(const Branch *branch)

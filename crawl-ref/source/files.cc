@@ -1964,7 +1964,8 @@ static bool _bones_save_individual_levels(bool store)
     // n.b. some branches here may not currently generate ghosts.
     // TODO: further adjustments? Make Zot coarser?
     return store ? player_in_branch(BRANCH_DUNGEON) ||
-                   player_in_branch(BRANCH_LAIR)
+                   player_in_branch(BRANCH_LAIR) ||
+                   player_in_branch(BRANCH_SOLARIUM)
                  : !(player_in_branch(BRANCH_ZIGGURAT) ||
                      player_in_branch(BRANCH_CRYPT) ||
                      player_in_branch(BRANCH_TOMB) ||

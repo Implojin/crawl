@@ -1,0 +1,139 @@
+##############################################################################
+# solarium.des: Solarium vaults.
+#
+# At time of writing, Solarium vaults are mostly nonexistent. Have fun!
+##############################################################################
+
+{{
+-- Common Solarium entry feature setup.
+function solar_entry(e)
+    e.tags("solar_entry uniq_solar_entry chance_solar_entry no_monster_gen transparent")
+    e.kfeat("O = enter_solarium")
+    e.orient("float")
+    e.colour("' = lightgrey")
+    e.ftile("' = floor_solarium")
+    e.rtile("x = wall_solarium")
+    e.ftile("O = floor_solarium")
+end
+
+function solar_entry_native_walls(e)
+    e.tags("solar_entry uniq_solar_entry chance_solar_entry no_monster_gen transparent")
+    e.kfeat("O = enter_solarium")
+    e.orient("float")
+    e.colour("' = lightgrey")
+    e.ftile("' = floor_solarium")
+end
+}}
+
+##############################################################################
+# Solarium entry vaults.
+#
+# TODO: Replace some of these mons with branch-native monsters, 
+#       when they're added.
+##############################################################################
+
+NAME:   implo_solar_glass_1
+MONS:   shadow / mummy / mummy
+MONS:   shadow
+KMONS:  P = plant
+SUBST:  P = P', 1 = 11', 0 = 00.
+SUBST:  x = xxm
+SUBST:  ' = '.
+SUBST:  . = ....'
+: solar_entry(_G)
+MAP
+..P....1...P.
+.x0........0P
+.....Pxxxx...
+...Pmx''2x...
+...x'''''x...
+.1.x'1''xP...
+PP.'P'O'P'.PP
+...Px''1'x.1.
+...x'''''x...
+...x2''xmP...
+...xxxxP.....
+P0........0x.
+.P...1....P..
+ENDMAP
+
+NAME:   implo_solar_glass_mini
+MONS:   shadow / mummy / mummy
+MONS:   shadow
+KMONS:  P = plant
+SUBST:  P = P', 1 = 11'
+SUBST:  x = xxm
+SUBST:  ' = '.
+SUBST:  . = ....'
+: solar_entry(_G)
+MAP
+..1Pxxxx.
+.Pxx''2xP
+.x'''''xP
+.x'1''xP.
+1'P'O'P'1
+.Px''1'x.
+Px'''''x.
+Px2''xxP.
+.xxxxP1..
+ENDMAP
+
+NAME:   implo_solar_glass_mini_randomized
+MONS:   shadow / mummy / mummy / guardian mummy
+MONS:   shadow
+SUBST:  ' = 2:1 1:3 ':20
+KMONS:  P = plant
+SUBST:  P = P'
+SUBST:  x = xxm
+SUBST:  ' = '..
+: solar_entry(_G)
+MAP
+'''Pxxxx'
+'Pxx'''xP
+'x'''''xP
+'x''''xP'
+''P'O'P''
+'Px''''x'
+Px'''''x'
+Px'''xxP'
+'xxxxP'''
+ENDMAP
+
+NAME:   implo_solar_glass_native
+MONS:   shadow / mummy / mummy / guardian mummy
+MONS:   shadow
+SUBST:  ' = 2:1 1:3 ':8
+KMONS:  P = plant
+SUBST:  P = P'
+SUBST:  x = xxm
+SUBST:  ' = '.
+: solar_entry_native_walls(_G)
+MAP
+   Pxxxx 
+ Pxx'''xP
+ x'''''xP
+ x''''xP 
+  P'O'P  
+ Px''''x 
+Px'''''x 
+Px'''xxP 
+ xxxxP   
+ENDMAP
+
+NAME:   implo_solar_danger_zone
+MONS:   shadow / mummy / guardian mummy / wraith / killer bee
+MONS:   shadow
+SUBST:  . = 2:2 1:3 .:20
+KMONS:  O = 8
+: solar_entry_native_walls(_G)
+MAP
+0           0
+ .         . 
+ ....mmm.... 
+   .m...m.   
+   m..O..m   
+   .m...m.   
+ ....mmm.... 
+ .         . 
+0           0
+ENDMAP

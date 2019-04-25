@@ -5027,6 +5027,14 @@ static const pop_entry _invitation_crypt[] =
   { 0,0,0,FLAT,MONS_0 }
 };
 
+static const pop_entry _invitation_solarium[] =
+{ // Solarium enemies
+  {  1,   1,   60, FLAT, MONS_BLINK_FROG },
+  {  1,   1,   40, FLAT, MONS_DREAM_SHEEP },
+  {  1,   1,   20, FLAT, MONS_SPINY_FROG },
+  { 0,0,0,FLAT,MONS_0 }
+};
+
 static branch_summon_pair _invitation_summons[] =
 {
   { BRANCH_LAIR,   _invitation_lair },
@@ -5037,7 +5045,8 @@ static branch_summon_pair _invitation_summons[] =
   { BRANCH_ORC,    _invitation_orc },
   { BRANCH_ELF,    _invitation_elf },
   { BRANCH_VAULTS, _invitation_vaults },
-  { BRANCH_CRYPT,  _invitation_crypt }
+  { BRANCH_CRYPT,  _invitation_crypt },
+  { BRANCH_SOLARIUM, _invitation_solarium }
 };
 
 static const pop_entry _planerend_snake[] =

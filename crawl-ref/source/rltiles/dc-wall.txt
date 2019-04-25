@@ -372,6 +372,12 @@ orc10
 orc11
 
 %weight 10
+wall_vines1 WALL_SOLARIUM
+wall_vines2
+wall_vines3
+wall_vines4
+
+%weight 10
 slime0 WALL_SLIME
 slime1
 slime2

@@ -303,6 +303,9 @@ tileidx_t tileidx_feature_base(dungeon_feature_type feat)
         return TILE_DNGN_ENTER_ELF;
     case DNGN_ENTER_LAIR:
         return TILE_DNGN_ENTER_LAIR;
+    case DNGN_ENTER_SOLARIUM:
+        return you.level_visited(level_id(BRANCH_LAIR, 1)) ? TILE_DNGN_ENTER_SOLARIUM_CLOSED
+                              : TILE_DNGN_ENTER_SOLARIUM_OPEN;
     case DNGN_ENTER_SNAKE:
         return TILE_DNGN_ENTER_SNAKE;
     case DNGN_ENTER_SWAMP:
@@ -361,6 +364,8 @@ tileidx_t tileidx_feature_base(dungeon_feature_type feat)
         return TILE_DNGN_EXIT_ELF;
     case DNGN_EXIT_LAIR:
         return TILE_DNGN_EXIT_LAIR;
+    case DNGN_EXIT_SOLARIUM:
+        return TILE_DNGN_EXIT_SOLARIUM;
     case DNGN_EXIT_SNAKE:
         return TILE_DNGN_EXIT_SNAKE;
     case DNGN_EXIT_SWAMP:
@@ -3661,6 +3666,8 @@ tileidx_t tileidx_branch(const branch_type br)
         return TILE_DNGN_ENTER_ELF;
     case BRANCH_LAIR:
         return TILE_DNGN_ENTER_LAIR;
+    case BRANCH_SOLARIUM:
+        return TILE_DNGN_ENTER_SOLARIUM_OPEN;
     case BRANCH_SWAMP:
         return TILE_DNGN_ENTER_SWAMP;
     case BRANCH_SHOALS:
