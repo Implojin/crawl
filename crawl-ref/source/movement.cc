@@ -646,7 +646,7 @@ static spret _rampage_forward(coord_def move)
     const bool enhanced = player_equip_unrand(UNRAND_SEVEN_LEAGUE_BOOTS);
     const int rampage_distance = enhanced
         ? grid_distance(you.pos(), valid_target->pos()) - 1
-        : 1;
+        : min(you.rampaging(), grid_distance(you.pos(), valid_target->pos()) - 1);
 
     const coord_def rampage_destination = you.pos() + (move * rampage_distance);
     const coord_def rampage_target = you.pos() + (move * (rampage_distance + 1));

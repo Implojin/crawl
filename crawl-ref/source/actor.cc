@@ -331,12 +331,23 @@ int actor::spirit_shield(bool items) const
     return ss;
 }
 
-bool actor::rampaging(bool items) const
+int actor::rampaging(bool items) const
 {
-    return items &&
-           (wearing_ego(EQ_ALL_ARMOUR, SPARM_RAMPAGING)
-            || scan_artefacts(ARTP_RAMPAGING)
-            || is_player() && player_equip_unrand(UNRAND_SEVEN_LEAGUE_BOOTS));
+    int rampage = 0;
+
+    if (items)
+    {
+        rampage += wearing_ego(EQ_ALL_ARMOUR, SPARM_RAMPAGING);
+        rampage += scan_artefacts(ARTP_RAMPAGING);
+
+        if (is_player() && player_equip_unrand(UNRAND_SEVEN_LEAGUE_BOOTS))
+            rampage++;
+    }
+
+    if (rampage > 3)
+        rampage = 3;
+
+    return rampage;
 }
 
 int actor::apply_ac(int damage, int max_damage, ac_type ac_rule, bool for_real) const

@@ -1823,7 +1823,8 @@ int update_monster_pane()
 //  level : actual resistance level
 //  max : maximum number of levels of the resistance
 //  immune : overwrites normal pip display for full immunity
-static string _itosym(int level, int max = 1, bool immune = false)
+//  condense_pips : display resistance pips without extra spacing
+static string _itosym(int level, int max = 1, bool immune = false, bool condense_pips = false)
 {
     if (max < 1)
         return "";
@@ -1832,7 +1833,7 @@ static string _itosym(int level, int max = 1, bool immune = false)
         return "∞";
 
     string sym;
-    bool spacing = (max >= 5) ? false : true;
+    bool spacing = (max >= 5 || condense_pips) ? false : true;
 
     while (max > 0)
     {
@@ -2386,14 +2387,15 @@ static vector<formatted_string> _get_overview_stats()
 //      pos_resist : false for "bad" resistances (no tele, random tele),
 //          inverts the value for the colour choice
 //      immune : overwrites normal pip display for full immunity
+//      condense_pips : display resistance pips without extra spacing
 static string _resist_composer(const char * name, int spacing, int value,
                                int max = 1, bool pos_resist = true,
-                               bool immune = false)
+                               bool immune = false, bool condense_pips = false)
 {
     string out;
     out += _determine_colour_string(pos_resist ? value : -value, max, immune);
     out += chop_string(name, spacing);
-    out += _itosym(value, max, immune);
+    out += _itosym(value, max, immune, condense_pips);
 
     return out;
 }
@@ -2475,8 +2477,8 @@ static vector<formatted_string> _get_overview_resistances(
     out += _resist_composer("Harm", cwidth, harm) + "\n";
 
     const int rampage = you.rampaging();
-    out += _resist_composer("Rampage", cwidth, rampage, 1, true,
-                            player_equip_unrand(UNRAND_SEVEN_LEAGUE_BOOTS))
+    out += _resist_composer("Rampage", cwidth, rampage, 3, true,
+                            player_equip_unrand(UNRAND_SEVEN_LEAGUE_BOOTS), true)
            + "\n";
 
     const int archmagi = you.archmagi();
