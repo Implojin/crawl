@@ -65,6 +65,7 @@
 #include "transform.h"
 #include "tutorial.h"
 #include "view.h"
+#include "wizard.h" // enter_explore_mode() for EXPLORE_AFTER_DEATH build target
 #include "xom.h"
 
 void maybe_melt_player_enchantments(beam_type flavour, int damage)
@@ -980,6 +981,17 @@ void ouch(int dam, kill_method_type death_type, mid_t source, const char *aux,
             you.source_damage = 0;
         }
         you.source_damage += dam;
+
+#if defined(WIZARD) && defined(EXPLORE_AFTER_DEATH)
+        // Here we hack our way into explore mode just as lethal damage occurs.
+        // HUPs at the prompt *should* silently proceed, generating a morgue.
+        if (dam >= you.hp
+            && (!crawl_state.test || !you.wizard || !you.suppress_wizard || !(you.explore && !you.lives)))
+        {
+            if (yesno("You are about to die. Do you wish to enter explore mode?", false, 'n'))
+                enter_explore_mode();
+        }
+#endif
 
         dec_hp(dam, true);
 
