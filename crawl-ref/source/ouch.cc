@@ -986,7 +986,7 @@ void ouch(int dam, kill_method_type death_type, mid_t source, const char *aux,
         // Here we hack our way into explore mode just as lethal damage occurs.
         // HUPs at the prompt *should* silently proceed, generating a morgue.
         if (dam >= you.hp
-            && (!crawl_state.test || !you.wizard || !you.suppress_wizard || !(you.explore && !you.lives)))
+            && !(crawl_state.test || you.wizard || you.suppress_wizard || (you.explore && !you.lives)))
         {
             if (yesno("You are about to die. Do you wish to enter explore mode?", false, 'n'))
                 enter_explore_mode();
