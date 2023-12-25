@@ -799,11 +799,10 @@ devour on kill mutation
 When you kill living creatures you have a chance to devour their life force
 and restore health.
 %%%%
-roll mutation
+roll regen mutation
 
-You instinctively roll as you move toward enemies, rampaging forward an
-additional space. This mutation grants magic regeneration when rolling; the
-second level of this mutation regenerates both magic and health.
+When you move toward enemies you instinctively roll an additional space forward,
+regenerating both health and magic.
 %%%%
 double potion healing mutation
 

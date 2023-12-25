@@ -1020,20 +1020,13 @@ static const mutation_def mut_data[] =
   {"", "", ""},
 },
 
-{ MUT_ROLLPAGE, 0, 2, mutflag::good, false,
-  "roll",
+{ MUT_ROLLPAGE, 0, 1, mutflag::good, false,
+  "roll regen",
 
-  {"You regenerate magic when rolling toward enemies. (Rampage MPRegen)",
-   "You regenerate magic and health when rolling toward enemies. (Rampage Regen)",
-   ""},
-
-  {"You begin to regenerate magic when rolling toward enemies.",
-   "You begin to regenerate health when rolling toward enemies.",
-   ""},
-
-  {"You can no longer roll toward enemies.",
-   "You can no longer regenerate health when rolling toward enemies.",
-   ""},
+  {"You roll and regenerate health and magic when moving toward enemies. (Rampage)",
+   "", ""},
+  {"You begin to regenerate when rolling toward enemies.", "", ""},
+  {"You can no longer roll toward enemies.", "", ""},
 },
 
 { MUT_SHAGGY_FUR, 2, 3, mutflag::good, true,

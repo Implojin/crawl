@@ -55,9 +55,9 @@ rampage passive
 
 当你向敌人移动时，你会获得额外的一个自由步。
 %%%%
-roll passive
+roll regen passive
 
-<roll mutation>
+<roll regen mutation>
 %%%%
 faith passive
 

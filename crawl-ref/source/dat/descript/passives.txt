@@ -56,9 +56,9 @@ rampage passive
 
 You take an additional free step when moving towards enemies.
 %%%%
-roll passive
+roll regen passive
 
-<roll mutation>
+<roll regen mutation>
 %%%%
 faith passive
 

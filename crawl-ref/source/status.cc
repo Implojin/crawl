@@ -390,13 +390,11 @@ bool fill_status_info(int status, status_info& inf)
 
     case DUR_RAMPAGE_HEAL:
     {
-        const int rh_pwr = you.props[RAMPAGE_HEAL_KEY].get_int();
-        if (rh_pwr > 0)
+        const int rh_power = you.props[RAMPAGE_HEAL_KEY].get_int();
+        if (rh_power > 0)
         {
-            const int rh_lvl = you.get_mutation_level(MUT_ROLLPAGE);
-            inf.light_colour = rh_lvl < 2 ? LIGHTBLUE : LIGHTMAGENTA;
-            inf.light_text   = make_stringf(rh_lvl < 2 ? "MPRegen (%d)"
-                                                       : "Regen (%d)", rh_pwr);
+            inf.light_colour = LIGHTMAGENTA;
+            inf.light_text   = make_stringf("Regen (%d)", rh_power);
         }
         break;
     }
