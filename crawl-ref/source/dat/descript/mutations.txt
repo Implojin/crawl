@@ -802,7 +802,7 @@ and restore health.
 roll regen mutation
 
 When you move toward enemies you instinctively roll an additional space forward,
-regenerating both health and magic.
+regenerating both health and magic. This regeneration increases as you level up.
 %%%%
 double potion healing mutation
 

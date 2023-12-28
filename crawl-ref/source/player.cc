@@ -1178,7 +1178,8 @@ static int _player_bonus_regen()
     {
         const int rh_power = you.props[RAMPAGE_HEAL_KEY].get_int();
         if (rh_power > 0)
-            rr += rh_power * 60 * you.experience_level / 27 + 10;
+//            rr += rh_power * 60 * you.experience_level / 27 + 10;
+            rr += rh_power * you.experience_level * 2 + 14;
     }
 
     return rr;
@@ -1276,7 +1277,8 @@ int player_mp_regen()
     {
         const int rh_power = you.props[RAMPAGE_HEAL_KEY].get_int();
         if (rh_power > 0)
-            regen_amount += rh_power * 30 * you.experience_level / 27 + 5;
+//            regen_amount += rh_power * 30 * you.experience_level / 27 + 5;
+            regen_amount += rh_power * you.experience_level + 7;
     }
 
     if (have_passive(passive_t::jelly_regen))
