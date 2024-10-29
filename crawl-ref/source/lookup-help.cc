@@ -438,6 +438,25 @@ static vector<string> _get_skill_keys()
     return names;
 }
 
+/**
+ * Return a list of spell school names.
+ */
+static vector<string> _get_spell_school_keys()
+{
+    vector<string> names;
+    for (skill_type sk = SK_FIRST_MAGIC_SCHOOL; sk <= SK_LAST_MAGIC; ++sk)
+    {
+        const string name = lowercase_string(skill_name(sk));
+#if TAG_MAJOR_VERSION == 34
+        if (getLongDescription(name).empty())
+            continue; // obsolete skills
+#endif
+
+        names.emplace_back(name);
+    }
+    return names;
+}
+
 static bool _monster_filter(string key, string /*body*/)
 {
     const monster_type mon_num = _mon_by_name(key);
@@ -648,7 +667,7 @@ static bool _make_item_fake_unrandart(item_def &item, int unrand_index)
 }
 
 /**
- * Generate a ?/I menu entry. (ref. _simple_menu_gen()).
+ * Generate a ?/i menu entry. (ref. _simple_menu_gen()).
  */
 static MenuEntry* _item_menu_gen(char letter, const string &str, string &key)
 {
@@ -669,7 +688,7 @@ static MenuEntry* _item_menu_gen(char letter, const string &str, string &key)
 }
 
 /**
- * Generate a ?/F menu entry. (ref. _simple_menu_gen()).
+ * Generate a ?/f menu entry. (ref. _simple_menu_gen()).
  */
 static MenuEntry* _feature_menu_gen(char letter, const string &str, string &key)
 {
@@ -687,7 +706,7 @@ static MenuEntry* _feature_menu_gen(char letter, const string &str, string &key)
 }
 
 /**
- * Generate a ?/G menu entry. (ref. _simple_menu_gen()).
+ * Generate a ?/g menu entry. (ref. _simple_menu_gen()).
  */
 static MenuEntry* _god_menu_gen(char /*letter*/, const string &/*str*/, string &key)
 {
@@ -695,7 +714,7 @@ static MenuEntry* _god_menu_gen(char /*letter*/, const string &/*str*/, string &
 }
 
 /**
- * Generate a ?/A menu entry. (ref. _simple_menu_gen()).
+ * Generate a ?/a menu entry. (ref. _simple_menu_gen()).
  */
 static MenuEntry* _ability_menu_gen(char letter, const string &str, string &key)
 {
@@ -709,7 +728,7 @@ static MenuEntry* _ability_menu_gen(char letter, const string &str, string &key)
 }
 
 /**
- * Generate a ?/C menu entry. (ref. _simple_menu_gen()).
+ * Generate a ?/c menu entry. (ref. _simple_menu_gen()).
  */
 static MenuEntry* _card_menu_gen(char letter, const string &str, string &key)
 {
@@ -719,7 +738,7 @@ static MenuEntry* _card_menu_gen(char letter, const string &str, string &key)
 }
 
 /**
- * Generate a ?/S menu entry. (ref. _simple_menu_gen()).
+ * Generate a ?/s menu entry. (ref. _simple_menu_gen()).
  */
 static MenuEntry* _spell_menu_gen(char letter, const string &str, string &key)
 {
@@ -735,7 +754,20 @@ static MenuEntry* _spell_menu_gen(char letter, const string &str, string &key)
 }
 
 /**
- * Generate a ?/K menu entry. (ref. _simple_menu_gen()).
+ * Generate a ?/S menu entry. (ref. _simple_menu_gen()).
+ */
+static MenuEntry* _spell_school_menu_gen(char letter, const string &str, string &key)
+{
+    MenuEntry* me = _simple_menu_gen(letter, str, key);
+
+    const skill_type skill = str_to_skill_safe(str);
+    me->add_tile(tile_def(tileidx_skill(skill, TRAINING_ENABLED)));
+
+    return me;
+}
+
+/**
+ * Generate a ?/k menu entry. (ref. _simple_menu_gen()).
  */
 static MenuEntry* _skill_menu_gen(char letter, const string &str, string &key)
 {
@@ -748,7 +780,7 @@ static MenuEntry* _skill_menu_gen(char letter, const string &str, string &key)
 }
 
 /**
- * Generate a ?/B menu entry. (ref. _simple_menu_gen()).
+ * Generate a ?/b menu entry. (ref. _simple_menu_gen()).
  */
 static MenuEntry* _branch_menu_gen(char letter, const string &str, string &key)
 {
@@ -763,7 +795,7 @@ static MenuEntry* _branch_menu_gen(char letter, const string &str, string &key)
 }
 
 /**
- * Generate a ?/L menu entry. (ref. _simple_menu_gen()).
+ * Generate a ?/l menu entry. (ref. _simple_menu_gen()).
  */
 static MenuEntry* _cloud_menu_gen(char letter, const string &str, string &key)
 {
@@ -788,7 +820,7 @@ static MenuEntry* _cloud_menu_gen(char letter, const string &str, string &key)
 }
 
 /**
- * Generate a ?/U menu entry. (ref. _simple_menu_gen()).
+ * Generate a ?/u menu entry. (ref. _simple_menu_gen()).
  */
 static MenuEntry* _mut_menu_gen(char letter, const string &str, string &key)
 {
@@ -1059,6 +1091,15 @@ static int _describe_spell(const string &key, const string &suffix,
     return 0;
 }
 
+static int _describe_spell_school(const string &key, const string &suffix,
+                             string /*footer*/)
+{
+    const string skill_name = key.substr(0, key.size() - suffix.size());
+    const skill_type skill = skill_from_name(skill_name.c_str());
+    describe_skill(skill);
+    return 0;
+}
+
 static int _describe_skill(const string &key, const string &suffix,
                              string /*footer*/)
 {
@@ -1303,43 +1344,46 @@ static int _describe_mutation(const string &key, const string &suffix,
 
 /// All types of ?/ queries the player can enter.
 static const vector<LookupType> lookup_types = {
-    LookupType('M', "monster", _recap_mon_keys, _monster_filter,
+    LookupType('m', "monster", _recap_mon_keys, _monster_filter,
                _get_monster_keys, nullptr, nullptr,
                _describe_monster, lookup_type::toggleable_sort),
-    LookupType('S', "spell", _recap_spell_keys, _spell_filter,
+    LookupType('s', "spell (by name)", _recap_spell_keys, _spell_filter,
                nullptr, nullptr, _spell_menu_gen,
                _describe_spell, lookup_type::db_suffix),
-    LookupType('K', "skill", nullptr, nullptr,
+    LookupType('S', "spell (by school)", nullptr, nullptr,
+               nullptr, _get_spell_school_keys, _spell_school_menu_gen,
+               _describe_spell_school, lookup_type::none),
+    LookupType('k', "skill", nullptr, nullptr,
                nullptr, _get_skill_keys, _skill_menu_gen,
                _describe_skill, lookup_type::none),
-    LookupType('A', "ability", _recap_ability_keys, _ability_filter,
+    LookupType('a', "ability", _recap_ability_keys, _ability_filter,
                nullptr, nullptr, _ability_menu_gen,
                _describe_ability, lookup_type::db_suffix),
-    LookupType('C', "card", nullptr, nullptr,
+    LookupType('c', "card", nullptr, nullptr,
                nullptr, _get_card_keys, _card_menu_gen,
                _describe_card, lookup_type::db_suffix),
-    LookupType('I', "item", _recap_item_keys, _item_filter,
+    LookupType('i', "item", _recap_item_keys, _item_filter,
                item_name_list_for_glyph, nullptr, _item_menu_gen,
                _describe_item, lookup_type::none),
-    LookupType('F', "feature", _recap_feat_keys, _feature_filter,
+    LookupType('f', "feature", _recap_feat_keys, _feature_filter,
                nullptr, nullptr, _feature_menu_gen,
                _describe_feature, lookup_type::none),
-    LookupType('G', "god", nullptr, nullptr,
+    LookupType('g', "god", nullptr, nullptr,
                nullptr, _get_god_keys, _god_menu_gen,
                _describe_god, lookup_type::none),
-    LookupType('B', "branch", nullptr, nullptr,
+    LookupType('b', "branch", nullptr, nullptr,
                nullptr, _get_branch_keys, _branch_menu_gen,
                _describe_branch, lookup_type::disable_sort),
-    LookupType('L', "cloud", nullptr, nullptr,
+    LookupType('l', "cloud", nullptr, nullptr,
                nullptr, _get_cloud_keys, _cloud_menu_gen,
                _describe_cloud, lookup_type::db_suffix),
-    LookupType('P', "passive", nullptr, _passive_filter,
+    LookupType('p', "passive", nullptr, _passive_filter,
                nullptr, nullptr, _simple_menu_gen,
                _describe_generic, lookup_type::db_suffix),
-    LookupType('T', "status", nullptr, _status_filter,
+    LookupType('t', "status", nullptr, _status_filter,
                nullptr, nullptr, _simple_menu_gen,
                _describe_generic, lookup_type::db_suffix),
-    LookupType('U', "mutation", nullptr, _mutation_filter,
+    LookupType('u', "mutation", nullptr, _mutation_filter,
                nullptr, nullptr, _mut_menu_gen,
                _describe_mutation, lookup_type::db_suffix),
 };
@@ -1526,7 +1570,7 @@ public:
     public:
         LookupHelpMenuEntry(lookup_help_type lht)
         : MenuEntry(uppercase_first(lookup_help_type_name(lht)),
-                    MEL_ITEM, 1, tolower(lookup_help_type_shortcut(lht))),
+                    MEL_ITEM, 1, lookup_help_type_shortcut(lht)),
           typ(lht)
         {
             // TODO: tiles!
