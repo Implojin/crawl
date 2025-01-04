@@ -59,6 +59,7 @@ def _packages_to_install(args: argparse.Namespace) -> Set[str]:
         "pkg-config",
         "ccache",
         "advancecomp",  # used to compress release zips and png sprite sheets
+        "libglu1-mesa-dev",
     }
     if "TILES" in args.build_opts or "WEBTILES" in args.build_opts:
         packages.update(
