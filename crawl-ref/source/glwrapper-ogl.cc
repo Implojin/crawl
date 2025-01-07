@@ -18,10 +18,13 @@
 #  endif
 #  include <GLES/gl.h>
 # else
+#  if !defined(__MINGW32__) && !defined(__MACOSX__)
+#   define GL_GLEXT_PROTOTYPES
+#  endif
 #  include <SDL_opengl.h>
 #  if defined(__MACOSX__)
 #   include <OpenGL/glu.h>
-#  else
+#  elif defined(__MINGW32__)
 #   include <GL/glu.h>
 #  endif
 # endif
@@ -394,8 +397,14 @@ void OGLStateManager::load_texture(unsigned char *pixels, unsigned int width,
                         GL_LINEAR_MIPMAP_NEAREST);
         glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER,
                         Options.tile_filter_scaling ? GL_LINEAR : GL_NEAREST);
+#if defined(__MINGW32__) || defined(__MACOSX__)
         gluBuild2DMipmaps(GL_TEXTURE_2D, bpp, width, height,
                           texture_format, format, pixels);
+#else   // glu is deprecated, so use glGenerateMipmap where possible
+        glTexImage2D(GL_TEXTURE_2D, 0, bpp, width, height, 0,
+                     texture_format, format, pixels);
+        glGenerateMipmap(GL_TEXTURE_2D);
+#endif
     }
     else
 #endif

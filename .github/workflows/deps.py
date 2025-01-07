@@ -60,7 +60,8 @@ def _packages_to_install(args: argparse.Namespace) -> Set[str]:
         "ccache",
         "advancecomp",  # used to compress release zips and png sprite sheets
     }
-    if "TILES" in args.build_opts or "WEBTILES" in args.build_opts:
+    if ("TILES" in args.build_opts or "WEBTILES" in args.build_opts
+        or "ANDROID" in args.build_opts):
         packages.update(
             [
                 "libsdl2-image-dev",
@@ -78,6 +79,7 @@ def _packages_to_install(args: argparse.Namespace) -> Set[str]:
     if args.crosscompile:
         packages.add("mingw-w64")
         packages.add("nsis")  # makensis used to build Windows installer
+        packages.add("libpng-dev")
     if args.compiler == "clang":
         # dependencies for llvm.sh
         packages.update(["lsb-release", "wget", "software-properties-common"])
