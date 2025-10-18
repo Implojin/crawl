@@ -60,7 +60,7 @@ def _packages_to_install(args: argparse.Namespace) -> Set[str]:
         "ccache",
         "advancecomp",  # used to compress release zips and png sprite sheets
     }
-    if "TILES" in args.build_opts or "WEBTILES" in args.build_opts or "ANDROID" in args.build_opts:
+    if "TILES" in args.build_opts or "WEBTILES" in args.build_opts:
         packages.update(
             [
                 "libsdl2-image-dev",
@@ -71,6 +71,8 @@ def _packages_to_install(args: argparse.Namespace) -> Set[str]:
                 "fonts-dejavu",
             ]
         )
+    if "ANDROID" in args.build_opts:
+        packages.add("libpng-dev")
     if "FULLDEBUG" in args.debug_opts:
         packages.add("gdb")
     if args.coverage:
@@ -78,7 +80,7 @@ def _packages_to_install(args: argparse.Namespace) -> Set[str]:
     if args.crosscompile:
         packages.add("mingw-w64")
         packages.add("nsis")  # makensis used to build Windows installer
-        # native libpng used to generate tilesheets during the build
+        # ci needs non-crosscompiled libpng to generate tilesheets
         packages.add("libpng-dev")
     if args.compiler == "clang":
         # dependencies for llvm.sh
