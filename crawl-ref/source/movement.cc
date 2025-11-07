@@ -753,9 +753,6 @@ static spret _rampage_forward(coord_def move)
             || you.wizmode_teleported_into_rock);
 
     you.clear_far_engulf(false, true);
-    // No full-LOS stabbing from seven-league.
-    if (enhanced)
-        behaviour_event(mon_target, ME_ALERT, &you, you.pos());
 
     // Lastly, apply post-move effects unhandled by move_player_to_grid().
     apply_rampage_heal(distance_moved);
